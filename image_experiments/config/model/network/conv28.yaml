@@ -1,0 +1,12 @@
+# @package _global_
+
+model:
+  encoder:
+    _target_: src.model.network.Conv
+    img_size: 28
+    img_channels: 1
+
+  decoder:
+    _target_: src.model.network.Deconv
+    img_size: ${model.encoder.img_size}
+    img_channels: ${model.encoder.img_channels}

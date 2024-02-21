@@ -1,0 +1,7 @@
+_target_: src.model.eae.ActionList
+action_list:
+  name: objrot
+  num_basis: 8
+  group: SO3_And_Zoom
+  data_path: ./data/J_dense.pt
+  include_identity: True

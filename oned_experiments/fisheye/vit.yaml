@@ -1,0 +1,55 @@
+batchsize: 32
+seed: 1
+max_iteration: 250000
+report_freq: 10
+model_snapshot_freq: 250000
+manager_snapshot_freq: 250000
+num_workers: 2
+T_cond: 2
+T_pred: 1
+lr: 0.0003
+reg:
+  reg_bd:
+  reg_orth:
+
+train_data:
+  fn: ./datasets/shift_img.py
+  name: Shift_cifar
+  args:
+    root: ./datasets
+    train: True
+    T: 4
+    max_T: 9
+    max_vshift: 0
+    max_hshift: 16
+    deform: True
+
+model:
+  fn: ./models/seqae.py
+  name: SeqAELSTSQ_vit
+  args:
+    dim_m: 128
+    dim_a: 16
+    ch_x: 3
+    k: 2.
+    predictive: True
+    detachM: 0
+    n_blocks: 3
+    vit_args:
+      img_size: 32
+      patch_size: 4
+      mlp_ratio: 4
+      depth: 8
+      num_heads: 6
+      img_channels: 3
+      embed_dim: 384
+
+training_loop:
+  fn: ./training_loops.py
+  name: loop_seqmodel
+  args:
+    lr_decay_iter: 200000
+    reconst_iter: 100000
+
+
+

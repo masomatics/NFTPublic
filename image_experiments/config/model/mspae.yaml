@@ -1,0 +1,33 @@
+# @package _global_
+
+tag: mspae
+
+data:
+  dataset:
+    num_views: 2
+    stationary: True
+
+model:
+  _target_: src.model.mspae.LitMSPAE
+  latent_dim: 32
+  action_dim: 10
+  num_patches: 49
+  enc_embed_dim: 64
+  dec_embed_dim: 64
+
+
+trainer:
+  logger: 
+    name: "nview${data.dataset.num_views}\
+    /${tag}\
+    /actdim${model.action_dim}_ldim${model.latent_dim}_${optimizer._target_}_bs${data.batch_size}_lr${optimizer.lr}_wd${optimizer.weight_decay}"
+
+paramspace:
+  model.latent_dim: 
+    _target_: optuna.trial.Trial.suggest_int
+    low: 16
+    high: 256
+  model.action_dim: 
+    _target_: optuna.trial.Trial.suggest_int
+    low: 1
+    high: 40

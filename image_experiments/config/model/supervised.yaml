@@ -1,0 +1,15 @@
+# @package _global_
+
+tag: supervised
+
+model:
+  _target_: src.model.supervised.LitSupervised
+  encoder_dim: 3136
+  num_classes: 10
+
+trainer:
+  logger: 
+    name: "nview${data.dataset.num_views}\
+    /${tag}\
+    /${optimizer._target_}_bs${data.batch_size}_lr${optimizer.lr}_wd${optimizer.weight_decay}"
+  max_epochs: 50

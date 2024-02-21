@@ -1,0 +1,15 @@
+# @package _global_
+
+resume: True
+
+data:
+  num_workers: 4
+
+trainer:
+  max_epochs: 200
+  strategy: auto 
+  # deterministic: True
+  deterministic: warn
+  logger:
+    name: ${tag}/best/${seed}
+    version: 0 

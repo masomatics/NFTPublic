@@ -1,0 +1,30 @@
+# @package _global_
+
+model:
+  _target_: src.model.eae.LitEquivariantAE
+  latent_dim: 64
+  num_patches: 256
+  enc_embed_dim: 512
+  dec_embed_dim: 256
+  latent_pooling: average
+  adapter: lowrank
+
+  encoder:
+    _target_: src.model.network.ViTEncoder
+    img_size: 64
+    patch_size: 4
+    mlp_ratio: 4
+    depth: 9
+    embed_dim: ${model.enc_embed_dim}
+    num_heads: 12
+    img_channels: 3
+
+  decoder:
+    _target_: src.model.network.ViTDecoder
+    img_size: ${model.encoder.img_size}
+    patch_size: ${model.encoder.patch_size}
+    mlp_ratio: 4
+    depth: 3
+    embed_dim: ${model.dec_embed_dim}
+    num_heads: 6
+    img_channels: ${model.encoder.img_channels}

@@ -1,0 +1,13 @@
+# @package _global_
+
+tag: ae
+
+model:
+  _target_: src.model.ae.LitAutoEnc
+
+trainer:
+  logger: 
+    name: "nview${data.dataset.num_views}\
+    /${tag}\
+    /${optimizer._target_}_bs${data.batch_size}_lr${optimizer.lr}_wd${optimizer.weight_decay}"
+    default_hp_metric: False

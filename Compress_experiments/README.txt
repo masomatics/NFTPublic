@@ -1,0 +1,19 @@
+Usage:
+1) Put make_compDFT_files.sh and  neurips_compDFT.zip in the same directory. 
+2) Edit "directory" variable in make_compDFT_files.sh so that "directory" is used to install the program files. 
+3) run "sh make_compDFT_files.sh"
+4) cd "directory". 
+5) run "pip install -r requirements.txt"
+6) run "sh neurips_compDFT.sh"
+7) Experimental results will be written in "Results/neurips_compDFT_tesult.txt"
+
+This code has been confirmed with the following environment:
+python: 3.7.12
+CUDA 11.7
+torch 1.13.1
+torchvision 0.14.1
+torchaudio 0.13.1
+
+After installing python 3.7.12, the following pip has been applied to install torch. 
+Example: 
+pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117

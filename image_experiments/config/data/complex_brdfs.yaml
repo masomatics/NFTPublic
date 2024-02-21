@@ -1,0 +1,21 @@
+_target_: torch.utils.data.DataLoader
+
+dataset:
+  _target_: src.datamodule.complex_brdfs.Complex_BRDFs
+  root: /path/to/data
+  cache_dir: /tmp/complex_brdfs
+  num_views: 1
+  transform:
+    _target_: torchvision.transforms.Compose
+    transforms:
+      - _target_: torchvision.transforms.ToTensor
+      - _target_: torchvision.transforms.CenterCrop
+        size: 224
+      - _target_: torchvision.transforms.Normalize
+        mean: [0.5309793427511269, 0.5324581989949121, 0.5237872483632515]
+        std: [0.07268445847356028, 0.05977585285135131, 0.07597311825112561]
+
+batch_size: 64
+num_workers: 8
+pin_memory: True
+persistent_workers: True

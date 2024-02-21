@@ -1,0 +1,27 @@
+# @package _global_
+
+tag: contrastive
+
+model:
+  _target_: src.model.contrastive.LitContrastiveEnc
+  enc_total_dim: 3136
+  head_dim: 64
+  temperature: 0.1
+
+trainer:
+  logger: 
+    name: "nview${data.dataset.num_views}\
+    /${tag}\
+    /temp${model.temperature}\
+    /${optimizer._target_}_bs${data.batch_size}_lr${optimizer.lr}_wd${optimizer.weight_decay}"
+
+paramspace:
+  model.head_dim: 
+    _target_: optuna.trial.Trial.suggest_int
+    low: 32
+    high: 256
+  model.temperature: 
+    _target_: optuna.trial.Trial.suggest_float
+    low: 1e-6
+    high: 1
+    log: True

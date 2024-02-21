@@ -1,0 +1,48 @@
+# @package _global_
+
+tag: equiv_ae
+
+model:
+  _target_: src.model.eae.LitEquivariantAE
+  latent_dim: 32
+  num_patches: 49
+  enc_embed_dim: 64
+  dec_embed_dim: 64
+  latent_pooling: average
+  adapter: straight
+  action_list: 
+    _target_: src.model.eae.ActionList
+    action_list:
+      name: rot
+      num_basis: 8
+      group: SO2
+      include_identity: True
+
+loss:
+  pred: True
+  pred_l1: False
+  reconst: False
+  alignl2: False
+  nalignl2: False
+  equiv_coef: 1
+  angle_variance: False
+
+trainer:
+  logger: 
+    name: "nview${data.dataset.num_views}\
+    /${tag}\
+    /ldim${model.latent_dim}_nbasis${model.action_list.action_list.num_basis}\
+    /${optimizer._target_}_bs${data.batch_size}_lr${optimizer.lr}_wd${optimizer.weight_decay}"
+
+paramspace:
+  model.latent_dim: 
+    _target_: optuna.trial.Trial.suggest_int
+    low: 16
+    high: 256
+  model.action_list.action_list.num_basis: 
+    _target_: optuna.trial.Trial.suggest_int
+    low: 1
+    high: 12
+  loss.alignl2:
+    _target_: optuna.trial.Trial.suggest_categorical
+    choices: [False, True]

@@ -1,0 +1,23 @@
+defaults:
+  - _self_
+  - data: null
+  - model: null
+  - model/network: null
+  - action: null  
+  - experiment: null
+  - mode: null
+  - hpsearch: null
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled  
+
+test: False
+optuna: False
+resume: True
+copy_cache: True
+tag: ???
+seed: null
+
+hydra:  
+  output_subdir: null  
+  run:  
+    dir: .

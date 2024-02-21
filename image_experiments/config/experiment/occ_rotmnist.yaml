@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - /experiment/rot_mnist
+  - _self_
+  #- override /data: rot_mnist
+  #- override /model/network: conv28
+
+expname: occ_rotmnist
+
+data:
+  dataset:
+    occlusion: True
+
+optuna:
+  optimize:
+    n_trials: 20

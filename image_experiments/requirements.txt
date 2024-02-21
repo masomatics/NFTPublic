@@ -1,0 +1,14 @@
+torch
+einops
+plotnine
+hydra-core
+pytorch_lightning
+lightning
+timm
+pyrootutils
+torch_tb_profiler
+pfio
+optuna
+# hydra-optuna-sweeper
+PyMySQL 
+cryptography

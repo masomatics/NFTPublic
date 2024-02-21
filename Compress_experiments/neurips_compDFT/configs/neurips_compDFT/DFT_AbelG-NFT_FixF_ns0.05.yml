@@ -1,0 +1,59 @@
+batchsize: &nbat 16
+seed: 5
+max_iteration: &itr 200000
+report_freq: 500
+model_snapshot_freq: *itr
+manager_snapshot_freq: *itr
+num_workers: 2
+T_cond: 4
+T_pred: 6
+lr: 0.0001
+gpu_id: &gid 0
+
+fixedM: False
+
+train_data:
+  fn: ./period_fn.py
+  name: Shifted_FixedFreqFun_nl
+  args:
+    Ndata: &ndat 5000
+    T: 10
+    max_T: 10
+    shift_label: True
+    indexing: False
+    shift_range: 2
+    batchM_size: *nbat
+    nfreq: 5
+    ns: 0.05
+
+model:
+  fn: ./models/seqae.py
+  name: SeqAETSQmlp 
+  args:
+    dim_m: 1
+    dim_a: 32
+    enc_hdim: 512
+    dec_hdim: 512
+    depth: 2
+    act: tanh
+    coef_internal: 0.0
+    predictive: True
+    optMg_loss: False    # add loss for optimized M(g).   
+    gpu_id: *gid
+    transition_model: AbelMSP  # either of LS, Fixed,MgMAML, MgDGD, NNgr, NNgi, Abel
+    
+    second_transition: 
+
+
+training_loop:
+  fn: ./training_loops.py
+  name: loop_seqmodel
+  args:
+    lr_decay_iter: 40000
+    lr_decay_ratio: 5.0
+    lr_decay_iter1: 40000
+    lr_decay_iter2: 80000
+    lr_decay_ratio1: 5.0
+    lr_decay_ratio2: 3.0
+    reconst_iter: *itr
+

@@ -1,0 +1,51 @@
+batchsize: 32
+seed: 1
+max_iteration: 100000
+report_freq: 100
+model_snapshot_freq: 100000
+manager_snapshot_freq: 100000
+num_workers: 2
+T_cond: 2
+T_pred: 1
+lr: 0.00001
+reg:
+  reg_bd:
+  reg_orth:
+
+train_data:
+  fn: ./period_fn.py
+  name: Shifted_FreqFun_nl
+  args:
+    Ndata: 30000
+    N: 128
+    T: 3
+    max_T: 9
+    shift_label: True
+    shift_range: 0.4
+    batchM_size: 20
+    nfreq: 5
+    freq_fix: True
+    freqseed: 1 and 2 and 3
+    smallfreqs_num: 2
+    smallfreqs_strength: 0.2
+
+model:
+  fn: ./models/seqae.py
+  name: SeqAETSQmlp
+  args:
+    dim_data: 128
+    dim_m: 16
+    dim_a: 10
+    predictive: True
+    transition_model: LS
+    activation: tanh
+
+training_loop:
+  fn: ./training_loops.py
+  name: loop_seqmodel
+  args:
+    lr_decay_iter: 80000
+    reconst_iter: 30000
+
+
+

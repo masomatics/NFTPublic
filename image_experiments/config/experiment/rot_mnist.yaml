@@ -1,0 +1,55 @@
+# @package _global_
+
+defaults:
+  - override /model/network: conv28
+  - override /data: rot_mnist
+
+expname: rot_mnist
+ood2: True
+
+data:
+  batch_size: 256
+  num_workers: 8
+  pin_memory: True
+  persistent_workers: True
+
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 1e-3
+  weight_decay: 0.05
+
+trainer:
+  _target_: lightning.Trainer
+  logger: 
+    _target_: pytorch_lightning.loggers.TensorBoardLogger
+    save_dir: log/${expname}
+    default_hp_metric: False
+  max_epochs: 100
+  accelerator: gpu
+  strategy: ddp
+  precision: 32
+
+paramspace:
+  optimizer.lr:
+    _target_: optuna.trial.Trial.suggest_float
+    low: 1e-6
+    high: 1e-2
+    log: True
+  optimizer.weight_decay:
+    _target_: optuna.trial.Trial.suggest_float
+    low: 1e-8
+    high: 1e-1
+    log: True
+
+optuna:
+  create_study:
+    direction: maximize
+    study_name: ${expname}__${tag}
+  optimize:
+    n_trials: 40
+
+k8s:
+  gpu: 1
+  cpu: 1
+  memory: 32
+  option: null

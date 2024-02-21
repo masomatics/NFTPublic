@@ -1,0 +1,19 @@
+_target_: torch.utils.data.DataLoader
+
+dataset:
+  _target_: src.datamodule.abo.ABO_Material
+  root: /path/to/data
+  cache_dir: /tmp/abo_material
+  num_views: 1
+  transform:
+    _target_: torchvision.transforms.Compose
+    transforms:
+      - _target_: torchvision.transforms.ToTensor
+      - _target_: torchvision.transforms.Normalize
+        mean: [0.4805061522282336, 0.43533766334187535, 0.3734930638441261]
+        std: [0.25286933313903676, 0.24991655845206148, 0.24874472049456617]
+
+batch_size: 64
+num_workers: 8
+pin_memory: True
+persistent_workers: True

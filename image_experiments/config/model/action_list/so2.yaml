@@ -1,0 +1,6 @@
+_target_: src.model.eae.ActionList
+action_list:
+  name: rot
+  num_basis: 8
+  group: SO2
+  include_identity: True

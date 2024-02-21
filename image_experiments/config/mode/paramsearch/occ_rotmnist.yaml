@@ -1,0 +1,18 @@
+# @package _global_
+
+experiment: 
+  name: occ_rotmnist
+target: src/paramsearch.py
+option: "experiment=${experiment.name} model=${model.name}"
+tag: "${experiment.name}_${model.name}"
+
+k8s:
+  gpu: 1
+  cpu: 4
+  memory: 32
+
+hydra:
+  sweeper:
+    params:
+      #+model.name: glob(/model/*)
+      +model.name: ae,contrastive,equiv_ae,inv_ae,mspae,supervised

@@ -1,0 +1,6 @@
+_target_: src.model.eae.ActionList
+action_list:
+  name: rot
+  num_basis: 4
+  group: SE2_Rototrans
+  include_identity: True

@@ -1,0 +1,9 @@
+_target_: torch.utils.data.DataLoader
+dataset:
+  _target_: src.datamodule.so3_modelnet.SO3_ModelNet10
+  root: /path/to/data
+  num_views: 2
+  transform:
+    _target_: torchvision.transforms.transforms.Normalize
+    mean: [0.9175, 0.9175, 0.9175]
+    std: [0.1404, 0.1404, 0.1404]

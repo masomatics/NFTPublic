@@ -1,0 +1,11 @@
+_target_: torch.utils.data.DataLoader
+
+dataset:
+  _target_: src.datamodule.rot_mnist.Rot_MNIST
+  root: ./data
+  occlusion: False
+  point_symmetry: False
+  num_views: 1
+
+pin_memory: True
+persistent_workers: True

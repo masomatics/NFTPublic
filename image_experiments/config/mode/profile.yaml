@@ -1,0 +1,23 @@
+# @package _global_
+
+resume: False
+
+trainer:
+  max_steps: 10
+  devices: 2
+  enable_checkpointing: False
+  profiler:
+    _target_: pytorch_lightning.profilers.PyTorchProfiler
+    # filename: perf_logs
+    schedule: 
+      _target_: torch.profiler.schedule
+      wait: 0
+      warmup: 2
+      active: 2
+    record_shapes: True
+    profile_memory: True
+    with_stack: True
+  logger:
+    save_dir: log/so3/profile
+    # name: profile
+  num_sanity_val_steps: 0

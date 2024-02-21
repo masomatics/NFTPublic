@@ -1,0 +1,10 @@
+log/
+figure/
+multirun/
+*.pyc
+.scratch
+.hydra
+.ipynb_checkpoints
+.mypy_cache
+.env
+nohup.out

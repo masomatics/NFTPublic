@@ -1,0 +1,12 @@
+# @package _global_
+
+tag: inv_ae
+
+model:
+  _target_: src.model.invariant_ae.LitInvariantAE
+
+trainer:
+  logger: 
+    name: "nview${data.dataset.num_views}\
+    /${tag}\
+    /${optimizer._target_}_bs${data.batch_size}_lr${optimizer.lr}_wd${optimizer.weight_decay}"

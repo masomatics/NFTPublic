@@ -1,0 +1,53 @@
+T_cond: 4
+T_pred: 2
+batchsize: 16
+config_path: /home/Projects/NFT_tmp/configs/neurips_compDFT/DFT_g-NFT_FixF_ns0.0.yml
+fig_dir: /home/Projects/NFT_tmp/figs/neurips_compDFT/DFT_g-NFT_FixF_ns0.0/
+fixedM: true
+gpu_id: 0
+log_dir: /home/Projects/NFT_tmp/logdir/neurips_compDFT/DFT_g-NFT-FixF-sd5-ns0.0/
+lr: 0.0001
+manager_snapshot_freq: 100000
+max_iteration: 100000
+model:
+  args:
+    coef_internal: 1.0
+    dec_hdim: 256
+    dim_a: 32
+    dim_m: 1
+    enc_hdim: 256
+    gpu_id: 0
+    optMg_loss: false
+    predictive: true
+    second_transition: null
+    transition_model: Fixed
+  fn: ./models/seqae.py
+  name: SeqAETSQmlp
+model_snapshot_freq: 100000
+num_workers: 2
+report_freq: 500
+seed: 5
+train_data:
+  args:
+    Ndata: 5000
+    T: 6
+    batchM_size: 16
+    indexing: false
+    max_T: 9
+    nfreq: 5
+    ns: 0.0
+    shift_label: true
+    shift_range: 2
+  fn: ./period_fn.py
+  name: Shifted_FixedFreqFun_nl
+training_loop:
+  args:
+    lr_decay_iter: 40000
+    lr_decay_iter1: 40000
+    lr_decay_iter2: 80000
+    lr_decay_ratio: 5.0
+    lr_decay_ratio1: 5.0
+    lr_decay_ratio2: 3.0
+    reconst_iter: 100000
+  fn: ./training_loops.py
+  name: loop_seqmodel
