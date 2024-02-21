@@ -1,5 +1,5 @@
 # Codebase for the paper Neural Fourier Transform: A General Approach to Equivariant Representation Learning
-(https://arxiv.org/abs/2305.18484 by Masanori Koyama, Kenji Fukumizu, Kohei Hayashi, Takeru Miyato. )
+[[arXiv]](https://arxiv.org/abs/2305.18484) by Masanori Koyama, Kenji Fukumizu, Kohei Hayashi, Takeru Miyato. 
 
 
 
