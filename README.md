@@ -1,6 +1,7 @@
-# Codebase for the paper Neural Fourier Transform: A General Approach to Equivariant Representation Learning
-[[arXiv]](https://arxiv.org/abs/2305.18484) by Masanori Koyama, Kenji Fukumizu, Kohei Hayashi, Takeru Miyato. 
+# Neural Fourier Transform: A General Approach to Equivariant Representation Learning
+This is a minimal Codebase for [[arXiv]](https://arxiv.org/abs/2305.18484) by Masanori Koyama, Kenji Fukumizu, Kohei Hayashi, Takeru Miyato. 
 
+ 
 
 
 ## NFT for 1d Experiment　(Foldername oned_experiments)
